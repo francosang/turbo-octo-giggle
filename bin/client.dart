@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+// Client for test/dev purposes only.
 void main(List<String> arguments) {
   Socket.connect('localhost', 5550).then((connection) {
     final sub = readLine().listen((data) {
