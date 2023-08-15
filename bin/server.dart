@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:convert';
 import 'dart:io';
 import 'package:uuid/uuid.dart';
 
@@ -9,18 +8,16 @@ final world = World();
 
 final List<Socket> clients = [];
 
-void main(List<String> arguments) {
+void main(List<String> arguments) async {
   print('Iniciando server...');
 
-  final serverFuture = ServerSocket.bind(InternetAddress.anyIPv4, 5550);
+  final server = await ServerSocket.bind(InternetAddress.anyIPv4, 5550);
 
-  serverFuture.then((server) {
-    print('Servidor iniciado!');
+  print('Servidor iniciado!');
 
-    server.listen((client) {
-      clients.add(client);
-      handleClientConnection(client);
-    });
+  server.listen((client) {
+    clients.add(client);
+    handleClientConnection(client);
   });
 }
 
