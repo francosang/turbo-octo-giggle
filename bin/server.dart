@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:convert';
 import 'dart:io';
 import 'package:uuid/uuid.dart';
 
@@ -44,13 +45,13 @@ void handleClientConnection(Socket client) {
 
       world.players[id]?.coordinates = Coordinates(x: x, y: y);
 
-      /*final worldMsg = jsonEncode(world);
+      final worldJson = world.toJson();
 
       for (var element in clients) {
         if (element == client) continue;
 
-        element.write(worldMsg);
-      }*/
+        element.write(worldJson);
+      }
 
       print('$world');
     },
@@ -73,22 +74,18 @@ void onDisconnected(String id) {
   print('$world');
 }
 
-/*
-
-[
- Jugador1 - (10,5),
- Jugador2 - (0,22),
- Jugador3 - (100,1),
-]
-
-*/
-
 class World {
   final Map<String, Player> players = HashMap();
 
   @override
   String toString() {
     return players.toString();
+  }
+
+  String toJson() {
+    return jsonEncode({
+      "players": players.map((key, value) => MapEntry(key, value.toJson()))
+    });
   }
 }
 
@@ -98,6 +95,12 @@ class Player {
   @override
   String toString() {
     return '(coods: $coordinates)';
+  }
+
+  String toJson() {
+    return jsonEncode({
+      "c": coordinates?.toJson(),
+    });
   }
 }
 
@@ -113,5 +116,12 @@ class Coordinates {
   @override
   String toString() {
     return '($x, $y)';
+  }
+
+  String toJson() {
+    return jsonEncode({
+      "x": x,
+      "y": y,
+    });
   }
 }
