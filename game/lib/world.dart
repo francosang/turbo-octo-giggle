@@ -9,10 +9,15 @@ const double imageSize = 16;
 const double tileScale = 4;
 const double tileSize = imageSize * tileScale;
 
+const double playerSize = 64;
+const double playerSpeed = tileSize * 4;
+
 class Mundito extends World with HasGameRef<Jueguito> {
+  late final TiledComponent map;
+
   @override
   FutureOr<void> onLoad() async {
-    final map = await TiledComponent.load(
+    map = await TiledComponent.load(
       "world.tmx",
       Vector2.all(tileSize),
     );
