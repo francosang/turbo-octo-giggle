@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:game/actores/player.dart';
+import 'package:game/actors/player.dart';
 import 'package:game/game.dart';
 
 const double imageSize = 16;
