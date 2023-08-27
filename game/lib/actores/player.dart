@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:flame/components.dart';
 import 'package:game/game.dart';
-import 'package:game/world.dart';
 
 class Player extends SpriteComponent with HasGameRef<Jueguito> {
   Player({
     required super.position,
-  }) : super(size: Vector2.all(200), anchor: Anchor.center);
+  }) : super(size: Vector2.all(100), anchor: Anchor.topLeft);
 
   @override
   FutureOr<void> onLoad() async {

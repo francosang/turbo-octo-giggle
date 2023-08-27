@@ -8,13 +8,14 @@ class Jueguito extends FlameGame {
   Jueguito();
 
   final mundito = Mundito();
+  final cameraComponent = CameraComponent();
 
   @override
   FutureOr<void> onLoad() async {
     images.prefix = '';
 
-    final cameraComponent = CameraComponent(world: mundito);
-    cameraComponent.viewfinder.anchor = Anchor.topLeft;
+    cameraComponent.world = mundito;
+    cameraComponent.viewfinder.anchor = Anchor.center;
 
     add(mundito);
     add(cameraComponent);
